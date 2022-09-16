@@ -59,7 +59,6 @@ class UserController extends Controller
         $requestData['password'] = password_hash($requestData['password'], PASSWORD_BCRYPT, $opts);
         $user = User::create($requestData);
 
-        $user->update($requestData);
         return response()->json($user, 201);
     }
 

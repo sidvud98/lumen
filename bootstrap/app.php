@@ -81,6 +81,7 @@ $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
     'auth.role' => \App\Http\Middleware\RoleAuthorization::class,
     'verified' => App\Http\Middleware\EnsureEmailIsVerified::class,
+    'adminCheck' =>  App\Http\Middleware\TaskMiddleware::class
  ]);
 
 /*
@@ -111,6 +112,7 @@ $app->alias('mail.manager', Illuminate\Contracts\Mail\Factory::class);
 $app->alias('mailer', Illuminate\Mail\Mailer::class);
 $app->alias('mailer', Illuminate\Contracts\Mail\Mailer::class);
 $app->alias('mailer', Illuminate\Contracts\Mail\MailQueue::class);
+$app->alias('Pusher',Pusher\Pusher::class);
 
 
 

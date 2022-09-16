@@ -20,9 +20,15 @@ $router->group(['prefix' => 'api', 'middleware' => 'auth'], function () use ($ro
 $router->group(['middleware' => 'auth'], function () use ($router) {
   $router->post('/tasks/create', 'TaskController@createTask');
   $router->get('/tasks', 'TaskController@showAllTasks');
-  $router->get('/utasks/{id}', 'TaskController@showUserTasks');
+  $router->get('/utasks', 'TaskController@showUserTasks');
   $router->post('/tasks/{id}', 'TaskController@updateTask');
+  $router->delete('/tasks/{id}', 'TaskController@deleteTask');
 });
+$router->group(['middleware' => ['auth','adminCheck']], function () use ($router) {
+  $router->get('/tasks', 'TaskController@showAllTasks');
+  
+});
+
 $router->group(['prefix' => 'api'], function () use ($router) {
   $router->post('users/login', 'AuthController@login');
   $router->get('users/{id}', ['uses' => 'UserController@showOneUser']);
